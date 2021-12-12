@@ -8,11 +8,11 @@ This model is the 2nd selected model to compare with the model of our chosen pap
 ```bash
 conda create --name mask2former python=3.8 -y
 conda activate mask2former
-conda install pytorch==1.9.0 torchvision cudatoolkit=11.1 -c pytorch -c nvidia
+pip install torch torchvision torchaudio
 pip install -U opencv-python
 
 # under your working directory
-git clone git@github.com:facebookresearch/detectron2.git
+git clone https://github.com/facebookresearch/detectron2
 cd detectron2
 pip install -e .
 pip install git+https://github.com/cocodataset/panopticapi.git
@@ -30,17 +30,18 @@ sh make.sh
 
 1. Pick a model and its config file from
   [model zoo](MODEL_ZOO.md),
-  for example, `configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep.yaml`.
+  for example, `configs/cityscapes/panoptic-segmentation/maskformer2_R101_bs16_90k.yaml`.
 2. There is `demo.py` that is able to demo builtin configs. Run it with:
 ```
 cd demo/
-python demo.py --config-file ../configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep.yaml \
+python demo.py --config-file ../configs/cityscapes/panoptic-segmentation/maskformer2_R101_bs16_90k.yaml \
   --input input1.jpg input2.jpg \
   [--other-options]
   --opts MODEL.WEIGHTS /path/to/checkpoint_file
 ```
 
 
+## We keep the license of the original ReadMe file
 ## License
 
 Shield: [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
