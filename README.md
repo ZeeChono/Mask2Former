@@ -19,7 +19,7 @@ pip install git+https://github.com/cocodataset/panopticapi.git
 pip install git+https://github.com/mcordts/cityscapesScripts.git
 
 cd ..
-git clone git@github.com:facebookresearch/Mask2Former.git
+git clone https://github.com/facebookresearch/Mask2Former
 cd Mask2Former
 pip install -r requirements.txt
 cd mask2former/modeling/pixel_decoder/ops
