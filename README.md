@@ -1,34 +1,45 @@
 # Mask2Former: Masked-attention Mask Transformer for Universal Image Segmentation
 
-[Bowen Cheng](https://bowenc0221.github.io/), [Ishan Misra](https://imisra.github.io/), [Alexander G. Schwing](https://alexander-schwing.de/), [Alexander Kirillov](https://alexander-kirillov.github.io/), [Rohit Girdhar](https://rohitgirdhar.github.io/)
+This model is the 2nd selected model to compare with the model of our chosen paper. They use different optimization techniques to the CNN. We aim to compare their performance using same dataset and pretrained models.
 
-[[`arXiv`](https://arxiv.org/abs/2112.01527)] [[`Project`](https://bowenc0221.github.io/mask2former)] [[`BibTeX`](#CitingMask2Former)]
 
-<div align="center">
-  <img src="https://bowenc0221.github.io/images/maskformerv2_teaser.png" width="100%" height="100%"/>
-</div><br/>
+## Run the following setup first:
+### Example conda environment setup
+```bash
+conda create --name mask2former python=3.8 -y
+conda activate mask2former
+conda install pytorch==1.9.0 torchvision cudatoolkit=11.1 -c pytorch -c nvidia
+pip install -U opencv-python
 
-### Features
-* A single architecture for panoptic, instance and semantic segmentation.
-* Support major segmentation datasets: ADE20K, Cityscapes, COCO, Mapillary Vistas.
+# under your working directory
+git clone git@github.com:facebookresearch/detectron2.git
+cd detectron2
+pip install -e .
+pip install git+https://github.com/cocodataset/panopticapi.git
+pip install git+https://github.com/mcordts/cityscapesScripts.git
 
-## Installation
+cd ..
+git clone git@github.com:facebookresearch/Mask2Former.git
+cd Mask2Former
+pip install -r requirements.txt
+cd mask2former/modeling/pixel_decoder/ops
+sh make.sh
+```
 
-See [installation instructions](INSTALL.md).
+## Run the pretrained model to test:
 
-## Getting Started
+1. Pick a model and its config file from
+  [model zoo](MODEL_ZOO.md),
+  for example, `configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep.yaml`.
+2. There is `demo.py` that is able to demo builtin configs. Run it with:
+```
+cd demo/
+python demo.py --config-file ../configs/coco/panoptic-segmentation/maskformer2_R50_bs16_50ep.yaml \
+  --input input1.jpg input2.jpg \
+  [--other-options]
+  --opts MODEL.WEIGHTS /path/to/checkpoint_file
+```
 
-See [Preparing Datasets for Mask2Former](datasets/README.md).
-
-See [Getting Started with Mask2Former](GETTING_STARTED.md).
-
-## Advanced usage
-
-See [Advanced Usage of Mask2Former](ADVANCED_USAGE.md).
-
-## Model Zoo and Baselines
-
-We provide a large set of baseline results and trained models available for download in the [Mask2Former Model Zoo](MODEL_ZOO.md).
 
 ## License
 
